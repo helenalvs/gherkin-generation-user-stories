@@ -1,0 +1,59 @@
+﻿codigo_historia,id_original,projeto,funcionalidade,historia_usuario,criterios_aceitacao
+H01,157,B,Administração/gestão,"Como usuário, gostaria de excluir minha conta.","* Botão ""Excluir conta"" disponível nas configurações
+* Aviso de segurança indicando que o processo de exclusão não pode ser desfeito
+* Aviso de proteção de dados sobre o uso posterior dos dados pessoais
+* Confirmação da exclusão
+* Todos os dados do usuário, incluindo dados pessoais, pedidos, listas de acompanhamento, endereços etc., são excluídos da loja
+* A loja gera uma notificação por e-mail para um endereço configurável"
+H02,937,A,Autenticação/conta,"Como usuário anônimo, gostaria de me cadastrar ou entrar no site para acessar meus dados de cliente.","* Como usuário anônimo, após clicar em Checkout, a página com opções de login e cadastro é exibida
+* Ao clicar em ""Vamos lá"", o usuário pode inserir o endereço do checkout
+* Após o cadastro bem-sucedido, é exibida uma máscara de endereço preenchida com todos os dados anteriores do cliente
+* O campo deve exibir ""E-mail"" corretamente, em vez de ""email"" do patternlab
+* A caixa de texto de e-mail deve interceptar entradas incorretas por meio de um validador de e-mail
+* As mensagens de erro devem ser exibidas de forma adequada à segurança, por exemplo, apenas ""Cadastro incorreto"", sem indicar exatamente qual campo está incorreto
+* Ao clicar em Cadastrar, a máscara de endereço anterior, o campo de senha e a repetição da senha são exibidos
+* Após inserir os dados, eles são salvos no banco de dados e o login passa a ser possível com esses dados
+* Após inserir os dados, o cliente recebe um e-mail no qual deve confirmar que é o destinatário correto
+* O cliente é informado de que só poderá continuar com os dados cadastrados após confirmar o e-mail
+* O cadastro é mantido por 7 dias
+* Textos padrão são incluídos nessa comunicação
+* Após confirmar o e-mail, o cliente é direcionado para a área de login no carrinho e deve fazer login, continuando em seguida como usuário autenticado"
+H03,229,B,B2B/eProcurement,"Como usuário logado, gostaria de enviar uma solicitação de preço para títulos sem preço.","* Botão ""Solicitar preço"" para títulos sem preço, disponível para usuários logados
+* Formulário exibido como sobreposição
+* Considerar responsividade
+* Texto do formulário pré-preenchido
+* Envio de e-mail com todas as informações necessárias para o destinatário configurado
+* O botão do carrinho de compras deve estar sempre oculto
+* Uma mensagem é exibida para usuários que não estão logados, possivelmente com link para cadastro
+* Feedback ao usuário"
+H04,932,A,Busca/navegação,"Como usuário, gostaria de pesquisar títulos usando listas de ISBN para não precisar inserir esses títulos manualmente na busca.","* A lista de ISBN pode ser inserida por copiar e colar
+* O campo pode ser limpo usando o botão ""Redefinir""
+* A busca por ISBN é tolerante a variações de escrita; ISBNs podem ser separados por hífens
+* É exibida uma lista de ISBNs que não foram encontrados no banco de dados durante a busca"
+H05,797,B,Carrinho,"Como usuário, gostaria de visualizar no carrinho quais elementos compõem o valor total exibido.","* O valor total é exibido em uma caixa no carrinho de compras
+* O total líquido é exibido
+* Os diferentes componentes de IVA/imposto são listados separadamente
+* O total bruto é exibido
+* Se o carrinho for alterado, os preços são atualizados"
+H06,762,B,Catálogo/produto,"Como usuário, gostaria de visualizar a disponibilidade de cada item para saber se ou quando ele estará disponível.","* Uma das 3 cores de semáforo para disponibilidade é exibida abaixo das informações de preço
+* A disponibilidade é exibida em texto à direita da cor do semáforo
+* Informações adicionais, como data de disponibilidade, são exibidas em uma segunda linha, possivelmente com quebra de linha"
+H07,167,B,Endereço/entrega,"Como usuário, gostaria de selecionar meus dados de entrega na visualização mobile.","* Manutenção e seleção de endereço
+* Seleção do método de envio
+* Navegação posterior"
+H08,175,B,Pagamento,"Como usuário, gostaria que a opção ""Pagamento na loja"" fosse exibida como método de pagamento para ""Retirada na loja"".","* A seleção de entrega ""Retirada na loja"" faz com que o único método de pagamento disponível seja ""Pagamento na loja"""
+H09,809,B,Pedido/compra,"Como usuário, gostaria de visualizar informações detalhadas ao clicar em uma conferência encontrada para saber mais sobre ela.","* Página de detalhes com:
++ Capa e categoria
++ Mídia, se mantida, e página de impressão ao lado
++ Detalhes: endereço e período/horário
++ Pessoas de contato são omitidas
++ Organizador da conferência
++ Outras opções de data serão omitidas por enquanto
++ Descrição
++ Programa
++ Painel de preço: mostrar preço normal e preço reduzido, se aplicável
++ Disponibilidade: ""Cinza - disponibilidade desconhecida""
++ Reserva de assento conforme especificado acima"
+H10,736,B,Wishlist/favoritos,"Como usuário logado, gostaria de compartilhar uma lista de desejos por meio da geração de um link.","* Ao clicar em ""Copiar link"", um link é gerado
+* O link gerado é copiado para a área de transferência
+* Uma mensagem toast com ""Link copiado para a área de transferência"" é exibida"
