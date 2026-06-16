@@ -1,6 +1,6 @@
 # Histórias de Usuário Selecionadas
 
-Este diretório contém o conjunto final de histórias de usuário selecionado para o experimento do TCC **"Geração automática de cenários BDD a partir de histórias de usuário com IA generativa: uma avaliação baseada em atributos de qualidade"**.
+Este repositório contém os artefatos utilizados no TCC **"Geração automática de cenários BDD a partir de histórias de usuário com IA generativa: uma avaliação baseada em atributos de qualidade"**. Incluindo as histórias de usuário selecionadas, o prompt zero-shot, os cenários BDD/Gherkin gerados, os conjuntos anonimizados e os arquivos de apoio à avaliação humana.
 
 ## Origem dos dados
 
@@ -14,9 +14,13 @@ Seguindo a orientação metodológica adotada no trabalho, o único critério de
 
 Após a filtragem, foi composta uma amostra inicial de 10 histórias por sorteio dentro de grupos funcionais. Após a geração dos cenários por duas fontes de IA generativa, foi aplicado um critério operacional de viabilidade: foram mantidas para avaliação humana apenas as histórias cujas duas versões geradas resultaram em até cinco cenários BDD por conjunto.
 
-## Arquivos
+## Arquivos principais
 
-- `user_stories_final.csv`: conjunto final de histórias de usuário selecionadas para o experimento.
+- `data/selected_user_stories.csv`: histórias selecionadas após filtragem e sorteio por grupos funcionais.
+- `data/user_stories_experiment.csv`: histórias preparadas para a geração dos cenários BDD.
+- `prompt/prompt_zero_shot_final.md`: prompt utilizado para geração dos cenários.
+- `generated_scenarios/`: cenários gerados pelas duas fontes de IA generativa.
+- `anonymized_scenarios/`: cenários anonimizados em conjuntos A/B.
 
 ## Estrutura do CSV
 
