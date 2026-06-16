@@ -12,9 +12,7 @@ Seguindo a orientação metodológica adotada no trabalho, o único critério de
 
 ## Critério de seleção final
 
-Após a filtragem, as histórias elegíveis foram agrupadas por tipo de funcionalidade. Em seguida, foi realizado sorteio dentro dos grupos funcionais, com o objetivo de compor uma amostra final com diversidade de funcionalidades do domínio de comércio eletrônico.
-
-A amostra final contém **10 histórias de usuário**, contemplando diferentes tipos de funcionalidade, como autenticação/conta, busca/navegação, carrinho, catálogo/produto, pagamento, endereço/entrega, pedido/compra, wishlist/favoritos, administração/gestão e B2B/eProcurement.
+Após a filtragem, foi composta uma amostra inicial de 10 histórias por sorteio dentro de grupos funcionais. Após a geração dos cenários por duas fontes de IA generativa, foi aplicado um critério operacional de viabilidade: foram mantidas para avaliação humana apenas as histórias cujas duas versões geradas resultaram em até cinco cenários BDD por conjunto.
 
 ## Arquivos
 
