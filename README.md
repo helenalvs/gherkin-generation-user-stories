@@ -26,8 +26,7 @@ Após a geração dos cenários pelas duas fontes de IA generativa, foram mantid
 * `data/eligible_user_stories_evaluation.csv`: 6 histórias elegíveis para avaliação humana.
 * `prompt/prompt_zero_shot_final.md`: prompt utilizado na geração dos cenários.
 * `generated_scenarios/`: cenários gerados pelas fontes de IA generativa.
-* `anonymized_scenarios/`: cenários anonimizados em conjuntos A/B.
-* `evaluation_scenarios/`: 12 conjuntos anonimizados utilizados na avaliação humana.
+* `evaluation_scenarios/`: conjuntos anonimizados utilizados na avaliação humana.
 
 ## Observação sobre anonimização
 
