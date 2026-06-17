@@ -1,16 +1,8 @@
-Feature: Compartilhamento de lista de desejos por link
+Feature: Compartilhamento de lista de desejos
 
-Scenario: Gerar link ao solicitar cópia do link da lista de desejos
-Given que o usuário está logado
-When o usuário solicita a ação "Copiar link"
+Scenario: Geração e cópia de link de compartilhamento
+Given que um usuário logado deseja compartilhar uma lista de desejos
+When o usuário aciona a opção "Copiar link"
 Then um link é gerado
-
-Scenario: Copiar link gerado para a área de transferência
-Given que o usuário está logado
-When o usuário solicita a ação "Copiar link"
-Then o link gerado é copiado para a área de transferência
-
-Scenario: Exibir mensagem de confirmação após copiar o link
-Given que o usuário está logado
-When o usuário solicita a ação "Copiar link"
-Then uma mensagem toast com o texto "Link copiado para a área de transferência" é exibida
+And o link gerado é copiado para a área de transferência
+And uma mensagem toast com "Link copiado para a área de transferência" é exibida
