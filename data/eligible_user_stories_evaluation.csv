@@ -17,4 +17,4 @@ H07,167,B,Endereço/entrega,"Como usuário, gostaria de selecionar meus dados de
 H08,175,B,Pagamento,"Como usuário, gostaria que a opção ""Pagamento na loja"" fosse exibida como método de pagamento para ""Retirada na loja"".","* A seleção de entrega ""Retirada na loja"" faz com que o único método de pagamento disponível seja ""Pagamento na loja""",1,1,Sim
 H10,736,B,Wishlist/favoritos,"Como usuário logado, gostaria de compartilhar uma lista de desejos por meio da geração de um link.","* Ao clicar em ""Copiar link"", um link é gerado
 * O link gerado é copiado para a área de transferência
-* Uma mensagem toast com ""Link copiado para a área de transferência"" é exibida",1,3,Sim
+* Uma mensagem toast com ""Link copiado para a área de transferência"" é exibida",3,1,Sim
