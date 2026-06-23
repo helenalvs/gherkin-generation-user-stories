@@ -15,9 +15,9 @@ O processo de seleção foi realizado em etapas:
 1. **Base original:** 307 histórias de usuário disponíveis no dataset.
 2. **Histórias aptas:** 201 histórias após filtragem por presença dos campos necessários, incluindo história de usuário e critérios de aceitação.
 3. **Amostra inicial de geração:** 10 histórias selecionadas por sorteio dentro de grupos funcionais, buscando diversidade entre funcionalidades.
-4. **Amostra final de avaliação humana:** 6 histórias elegíveis após aplicação do critério operacional de viabilidade.
+4. **Amostra final de avaliação humana:** 4 histórias elegíveis após aplicação do critério operacional de viabilidade.
 
-Após a geração dos cenários pelas duas fontes de IA generativa, foram mantidas para avaliação humana apenas as histórias cujas duas versões geradas resultaram em, no máximo, cinco cenários BDD por conjunto. Esse critério foi adotado para reduzir a carga de avaliação dos participantes e evitar fadiga durante o preenchimento do formulário.
+Após a geração dos cenários pelas duas fontes de IA generativa, foram mantidas para avaliação humana apenas as histórias cujas duas versões geradas resultaram em, no mínimo dois e no máximo cinco cenários BDD por conjunto. Esse critério foi adotado para reduzir a carga de avaliação dos participantes e evitar fadiga durante o preenchimento do formulário.
 
 ## Estrutura do repositório
 
