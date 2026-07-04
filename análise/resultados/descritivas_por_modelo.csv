@@ -1,0 +1,5 @@
+,clareza,clareza,completude,completude,objetividade,objetividade,separacao_cenarios,separacao_cenarios,aderencia_historia_criterios,aderencia_historia_criterios,fidelidade_artefatos_entrada,fidelidade_artefatos_entrada,qualidade_geral,qualidade_geral
+,mean,std,mean,std,mean,std,mean,std,mean,std,mean,std,mean,std
+modelo_fonte_controle_interno,,,,,,,,,,,,,,
+GPT-5.5,4.04,1.23,3.71,1.33,4.04,1.12,4.08,1.14,3.96,1.23,4.42,0.93,4.04,1.0
+Gemini 3.1 Pro,4.25,0.79,3.79,1.22,4.21,1.06,4.46,0.78,4.75,0.53,4.83,0.48,4.38,0.51
