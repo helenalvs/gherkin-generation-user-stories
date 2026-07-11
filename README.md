@@ -27,6 +27,8 @@ Após a geração dos cenários pelas duas fontes de IA generativa, foram mantid
 * `prompt/prompt_zero_shot_final.md`: prompt utilizado na geração dos cenários.
 * `generated_scenarios/`: cenários gerados pelas fontes de IA generativa.
 * `evaluation_scenarios/`: conjuntos anonimizados utilizados na avaliação humana.
+* `análise/`: código utilizado para realizar as análises
+* `análise/resultados`: resultados das análises
 
 ## Observação sobre anonimização
 
