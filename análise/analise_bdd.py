@@ -1,37 +1,15 @@
 """
-analise_bdd.py — versão enxuta
-===============================
-
-Pipeline ESSENCIAL de análise dos dados de avaliação humana de cenários
+Pipeline de análise dos dados de avaliação humana de cenários
 BDD/Gherkin gerados por IA generativa (GPT-5.5 e Gemini 3.1 Pro).
-
-Esta é uma versão deliberadamente enxuta: cada etapa existe porque responde
-a uma questão de pesquisa específica (QP1-QP4) ou à pergunta geral do TCC.
-Técnicas de reforço de rigor que não respondem a nenhuma QP diretamente
-(correlação entre critérios, teste de Friedman, confiabilidade entre
-avaliadores/ICC, comparação pareada por história, correção para múltiplas
-comparações) foram deixadas de fora para reduzir a curva de aprendizado —
-ver protocolo_analise_dados.md para a justificativa de cada corte.
-
-O único conceito estatístico novo neste script é o teste U de Mann-Whitney
-(Etapas 3 e 4), usado uma única vez sobre o índice composto de qualidade em
-cada comparação — não por critério — para evitar de saída o problema de
-comparações múltiplas (que exigiria aprender também correção de p-valor).
-
-Como usar:
-    1. Coloque este script na mesma pasta do arquivo
-       'respostas_consolidadas_tcc.csv' (ou ajuste CSV_PATH abaixo).
-    2. pip install pandas numpy scipy matplotlib seaborn --break-system-packages
-    3. python analise_bdd.py
-    4. Resultados (tabelas .csv e o gráfico .png) são salvos em ./resultados/
 """
 
 import os
 import numpy as np
 import pandas as pd
+import pingouin as pg
 from scipy import stats
 import matplotlib
-matplotlib.use("Agg")  # remova esta linha se for rodar em Jupyter com exibição inline
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -52,14 +30,13 @@ CRITERIOS = [
 NOMES_CRITERIOS = {
     "clareza": "Clareza",
     "completude": "Completude",
-    "objetividade": "Foco e essencialidade",
-    "separacao_cenarios": "Singularidade e unicidade",
-    "aderencia_historia_criterios": "Aderência aos artefatos de entrada",
+    "objetividade": "Objetividade",
+    "separacao_cenarios": "Separação dos cenários",
+    "aderencia_historia_criterios": "Aderência à história e aos critérios",
     "fidelidade_artefatos_entrada": "Fidelidade aos artefatos de entrada",
 }
 
 sns.set_theme(style="whitegrid", font_scale=0.9)
-
 
 # ---------------------------------------------------------------------------
 # ETAPA 0 — Carregamento e checagem de consistência dos dados
@@ -76,9 +53,8 @@ def carregar_dados(caminho=CSV_PATH):
 
 def checar_desenho_experimental(df):
     """Confirma que o dado coletado corresponde ao desenho planejado (Seção 5.8
-    do TCC): 6 avaliações por conjunto, 4 blocos por participante, 3 Senior +
-    3 Junior por conjunto. Puramente uma checagem de integridade — não exige
-    nenhum conceito estatístico."""
+    do TCC): 6 avaliações por conjunto, 4 blocos por participante, 3 com experiência de mais de 2 anos +
+    3 com experiência entre 1 e 2 anos."""
     problemas = []
     if not (df.groupby("historia_conjunto")["id_resposta"].nunique() == 6).all():
         problemas.append("Nem todo historia_conjunto tem exatamente 6 avaliações.")
@@ -86,7 +62,7 @@ def checar_desenho_experimental(df):
         problemas.append("Nem todo participante respondeu exatamente 4 blocos.")
     bal = pd.crosstab(df["historia_conjunto"], df["grupo_experiencia"])
     if not (bal == 3).all().all():
-        problemas.append("Balanceamento Senior/Junior por conjunto diferente de 3/3.")
+        problemas.append("Balanceamento de experiência por conjunto diferente de 3/3.")
     return problemas if problemas else ["OK — desenho consistente com o planejado."]
 
 
@@ -95,15 +71,11 @@ def checar_desenho_experimental(df):
 # (QP1, QP2, pergunta de pesquisa geral)
 # ---------------------------------------------------------------------------
 def cronbach_alpha(itens_df):
-    """Alfa de Cronbach: mede se os 6 critérios são consistentes o bastante
-    entre si para justificar resumi-los em um único índice composto
-    ('qualidade_geral'). Regra prática: <0,60 questionável; 0,70-0,90 boa
-    consistência; >0,90 ótima (por vezes redundante demais)."""
     itens_df = itens_df.dropna()
-    k = itens_df.shape[1]
-    var_itens = itens_df.var(axis=0, ddof=1).sum()
-    var_total = itens_df.sum(axis=1).var(ddof=1)
-    return (k / (k - 1)) * (1 - var_itens / var_total)
+
+    alpha, intervalo_confianca = pg.cronbach_alpha(data=itens_df)
+
+    return alpha, intervalo_confianca
 
 
 def estatisticas_descritivas(df, out_dir=OUT_DIR):
@@ -223,10 +195,12 @@ def main():
         print("   -", msg)
     print(f"   {df.shape[0]} avaliações | {df['id_resposta'].nunique()} participantes | "
           f"{df['historia_conjunto'].nunique()} conjuntos avaliados")
-
+  
     print("\n>> Etapa 1: estatística descritiva + índice composto + alfa de Cronbach...")
-    alpha = cronbach_alpha(df[CRITERIOS])
-    print(f"   Alfa de Cronbach (consistência interna dos 6 critérios): {alpha:.3f}")
+    alpha, intervalo_confianca = cronbach_alpha(df[CRITERIOS])
+    print(f"Alfa de Cronbach: {alpha:.3f}")
+    print(f"Intervalo de confiança de 95%: " f"[{intervalo_confianca[0]:.3f}, {intervalo_confianca[1]:.3f}]")
+    
     estatisticas_descritivas(df)
     print("   Qualidade geral por modelo:",
           df.groupby("modelo_fonte_controle_interno")["qualidade_geral"].mean().round(2).to_dict())
