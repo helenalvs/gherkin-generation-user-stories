@@ -79,9 +79,6 @@ def cronbach_alpha(itens_df):
 
 
 def estatisticas_descritivas(df, out_dir=OUT_DIR):
-    """Média, desvio-padrão e mediana por critério — geral, por fonte de
-    geração e por grupo de experiência — mais a proporção de notas altas
-    (>=4), uma leitura direta e barata da pergunta 'a qualidade é suficiente?'."""
     colunas = CRITERIOS + ["qualidade_geral"]
 
     geral = df[colunas].describe().T[["mean", "std", "50%"]].round(2)
@@ -104,9 +101,6 @@ def estatisticas_descritivas(df, out_dir=OUT_DIR):
 # ETAPA 2 — Visualização (um único gráfico)
 # ---------------------------------------------------------------------------
 def gerar_visualizacao(df, out_dir=OUT_DIR):
-    """Um boxplot (critério x fonte de geração). Suficiente para ilustrar o
-    achado numa apresentação/defesa sem precisar justificar múltiplos tipos
-    de gráfico."""
     df_long = df.melt(id_vars="modelo_fonte_controle_interno", value_vars=CRITERIOS,
                        var_name="criterio", value_name="nota")
     df_long["criterio"] = df_long["criterio"].map(NOMES_CRITERIOS)
@@ -126,11 +120,6 @@ def gerar_visualizacao(df, out_dir=OUT_DIR):
 # ETAPA 3 — Comparação entre fontes de geração (QP1, QP2, pergunta geral)
 # ---------------------------------------------------------------------------
 def comparar_modelos(df, out_dir=OUT_DIR):
-    """Mann-Whitney U comparando GPT-5.5 x Gemini 3.1 Pro, aplicado apenas ao
-    índice composto 'qualidade_geral' — de propósito só UM teste, não um por
-    critério, para não precisar de correção de comparações múltiplas.
-    Mann-Whitney (não teste t) porque a nota é ordinal (Likert 1-5), não
-    intervalar, e o grupo é pequeno (24 avaliações por fonte)."""
     a = df.loc[df["modelo_fonte_controle_interno"] == "GPT-5.5", "qualidade_geral"]
     b = df.loc[df["modelo_fonte_controle_interno"] == "Gemini 3.1 Pro", "qualidade_geral"]
     u, p = stats.mannwhitneyu(a, b, alternative="two-sided")
@@ -147,8 +136,6 @@ def comparar_modelos(df, out_dir=OUT_DIR):
 # ETAPA 4 — Comparação entre grupos de experiência (QP4, exploratório)
 # ---------------------------------------------------------------------------
 def comparar_experiencia(df, out_dir=OUT_DIR):
-    """Mesmo teste da Etapa 3, agora comparando avaliadores Senior x Junior.
-    QP4 pede essa comparação explicitamente, em caráter exploratório."""
     a = df.loc[df["grupo_experiencia"] == "Senior", "qualidade_geral"]
     b = df.loc[df["grupo_experiencia"] == "Junior", "qualidade_geral"]
     u, p = stats.mannwhitneyu(a, b, alternative="two-sided")
@@ -165,11 +152,6 @@ def comparar_experiencia(df, out_dir=OUT_DIR):
 # ETAPA 5 — Leitura qualitativa dos comentários (QP2, pergunta geral)
 # ---------------------------------------------------------------------------
 def exportar_comentarios(df, out_dir=OUT_DIR):
-    """Não há análise automática aqui de propósito: com só 20 comentários no
-    total, ler é mais rápido e mais confiável que qualquer classificador.
-    Esta função só organiza a leitura, ordenando do pior para o melhor
-    'qualidade_geral' — os comentários mais explicativos tendem a acompanhar
-    as notas mais baixas."""
     bloco = (df.loc[df["comentario_bloco"].notna(),
                     ["historia_conjunto", "modelo_fonte_controle_interno", "qualidade_geral", "comentario_bloco"]]
              .sort_values("qualidade_geral"))
