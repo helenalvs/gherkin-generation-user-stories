@@ -179,6 +179,8 @@ def main():
           f"{df['historia_conjunto'].nunique()} conjuntos avaliados")
   
     print("\n>> Etapa 1: estatística descritiva + índice composto + alfa de Cronbach...")
+    print(df[CRITERIOS])
+    print(df.columns)
     alpha, intervalo_confianca = cronbach_alpha(df[CRITERIOS])
     print(f"Alfa de Cronbach: {alpha:.3f}")
     print(f"Intervalo de confiança de 95%: " f"[{intervalo_confianca[0]:.3f}, {intervalo_confianca[1]:.3f}]")
@@ -188,7 +190,7 @@ def main():
           df.groupby("modelo_fonte_controle_interno")["qualidade_geral"].mean().round(2).to_dict())
     print("   Qualidade geral por experiência:",
           df.groupby("grupo_experiencia")["qualidade_geral"].mean().round(2).to_dict())
-
+    print(df.columns)
     print("\n>> Etapa 2: gerando o boxplot (fig1)...")
     gerar_visualizacao(df)
 
